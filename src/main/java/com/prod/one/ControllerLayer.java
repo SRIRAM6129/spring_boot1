@@ -3,7 +3,6 @@ package com.prod.one;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -88,15 +87,16 @@ public class ControllerLayer {
 
     //EXCEL FOR SHOW PRODUCT BASED ON CUSTOMER ID
     @GetMapping("/client/{id}/product/excel")
-
-    public ResponseEntity<String> createExcelOnProductByCustomerId(){
+    public ResponseEntity<String> createExcelOnProductByCustomerId(@PathVariable("id") int id){
         return ResponseEntity.ok("EXCEL BASED ON CUSTOMER ID HAS BEEN SUCCESSFULLY GENERATED");
     }
+
     //EXCEL FOR SHOW PRODUCT BASED ON CUSTOMER ID BETWEEN DATE
     @GetMapping("/client/{id}/product/date")
-    public ResponseEntity<String> createExcelOnProductByCustomerIdBetweenDate(){
+    public ResponseEntity<String> createExcelOnProductByCustomerIdBetweenDate(@PathVariable("id") int id){
         return ResponseEntity.ok("EXCEL BASED ON CUSTOMER ID BETWEEN DATE HAS BEEN SUCCESSFULLY GENERATED");
     }
+
     //EXCEL FOR SHOW PRODUCT BETWEEN THE DATE
     @GetMapping("/showproduct/date/excel")
     public ResponseEntity<String> createExcelOnProductByBetweenDate(
@@ -106,7 +106,8 @@ public class ControllerLayer {
             @RequestParam int endday,
             @RequestParam int endmonth,
             @RequestParam int endyear
-    ){
+    )
+    {
         LocalDate startdate = LocalDate.of(startyear, startmonth, startday);
         LocalDate enddate = LocalDate.of(endyear, endmonth, endday);
         return ResponseEntity.ok("EXCEL BETWEEN DATE HAS BEEN SUCCESSFULLY GENERATED");
