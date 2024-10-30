@@ -14,51 +14,31 @@ public class ServiceLayer {
 
     @Autowired
     private ProductRepo productrep;
-    @Autowired
-    private ProductRepo productRepo;
 
-    public List<ClientModel> showall() {
+    public List<ClientModel> showAllClientModel(){
         return clientrep.findAll();
     }
 
-    public ClientModel showClient(int id) {
-        return clientrep.findById(id).orElse(new ClientModel());
+    public ClientModel showClientModel(int id){
+        return clientrep.findById(id).orElse(null);
     }
 
-    public void addClient(ClientModel client) {
-        clientrep.save(client);
+    public void addClientModel(ClientModel clientModel){
+        clientrep.save(clientModel);
     }
 
-    public void deleteClient(int id) {
+    public void deleteClientModel(int id){
         clientrep.deleteById(id);
     }
 
-    public void addProd(int id , double quantity) {
-        ClientModel client = clientrep.findById(id).orElse(null);
-        if(client != null) {
-            ProductModel prod = new ProductModel();
-            prod.setClient(client);
-            prod.setQuantity(quantity);
-            productrep.save(prod);
-        }
-        else {
-            throw new IllegalArgumentException("ERROR IN ADD PRODUCT METHOD WHILE"+id +"ENTERING");
-        }
 
-    }
-    public List<ProductModel> showprod(int id) {
-        return null;
-    }
-
-    public List<ProductModel> showdateprod(LocalDate start,LocalDate end){
-        return null;
-    }
-
-    public List<ProductModel> showallprod() {
+    public List<ProductModel> showAllProductModel(){
         return productrep.findAll();
     }
+    public List<ProductModel> showProductModelByCustomerId(int clientid){
+        return productrep.findByCustomerId(clientid);
+    }
+    public List<ProductModel> showProductModelByProductId(int productid){
 
-    public List<ProductModel> showDateProducts(LocalDate start) {
-        return productrep.findByCreatedDateOrderByCustomerId(start);
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepo extends JpaRepository<ProductModel,Integer> {
-    List<ProductModel> findByCreatedDateOrderByCustomerId(LocalDate createdDate);
+
+    List<ProductModel> findByCustomerId(int customerId);
 
 }
