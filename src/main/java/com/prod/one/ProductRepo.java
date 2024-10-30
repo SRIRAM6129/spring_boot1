@@ -11,5 +11,5 @@ import java.util.List;
 public interface ProductRepo extends JpaRepository<ProductModel,Integer> {
 
     List<ProductModel> findByCustomerId(int customerId);
-
+    List<ProductModel> findByCreatedDateBetweenOrderByCreatedDateDescCustomerIdAscCreatedTimeDescId(LocalDate startDate, LocalDate endDate);
 }

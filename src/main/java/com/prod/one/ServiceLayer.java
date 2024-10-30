@@ -30,6 +30,9 @@ public class ServiceLayer {
     public void deleteClientModel(int id){
         clientrep.deleteById(id);
     }
+    public void updateClientModel(ClientModel clientModel){
+        clientrep.save(clientModel);
+    }
 
 
     public List<ProductModel> showAllProductModel(){
@@ -38,7 +41,21 @@ public class ServiceLayer {
     public List<ProductModel> showProductModelByCustomerId(int clientid){
         return productrep.findByCustomerId(clientid);
     }
-    public List<ProductModel> showProductModelByProductId(int productid){
 
+    public void addProductModel(int customerId,double quantity){
+        ClientModel client = clientrep.findById(customerId).orElse(null);
+        if(client == null ){
+            throw new RuntimeException("client not found");
+        }
+        else {
+            ProductModel product = new ProductModel();
+            product.setClient( client);
+            product.setCustomerId(client.getId());
+            product.setQuantity(quantity);
+            productrep.save(product);
+        }
+    }
+    public List<ProductModel> showProductModelByDate(LocalDate startDate, LocalDate endDate){
+        return productrep.findByCreatedDateBetweenOrderByCreatedDateDescCustomerIdAscCreatedTimeDescId(startDate, endDate);
     }
 }

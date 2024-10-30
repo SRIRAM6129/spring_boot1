@@ -38,7 +38,7 @@ public class ProductModel {
         this.quantity = quantity;
         this.customerId = customerId;
         this.createdDate = createdDate;
-        this.createdTime = createdTime;
+        this.createdTime = createdTime.withNano(0);
         this.client = client;
     }
 
@@ -75,11 +75,11 @@ public class ProductModel {
     }
 
     public LocalTime getCreatedTime() {
-        return createdTime;
+        return createdTime.withNano(0);
     }
 
     public void setCreatedTime(LocalTime createdTime) {
-        this.createdTime = createdTime;
+        this.createdTime = createdTime.withNano(0);
     }
 
     public ClientModel getClient() {

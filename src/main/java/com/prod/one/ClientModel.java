@@ -35,6 +35,7 @@ public class ClientModel {
         this.adhaarNumber = adhaarNumber;
         this.accountNumber = accountNumber;
         this.products = products;
+
     }
 
     public int getId() {

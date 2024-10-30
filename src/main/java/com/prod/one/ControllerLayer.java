@@ -37,6 +37,13 @@ public class ControllerLayer {
     }
 
 
+
+
+    @PostMapping("/showclient/{id}/product")
+    public ResponseEntity<String> addProductModel(@PathVariable("id") int id, @RequestParam double quantity) {
+        service.addProductModel(id,quantity);
+        return  ResponseEntity.ok("THE  PRODUCT HAS BEEN SUCCESSFULLY CREATED");
+    }
     @GetMapping("/showallproduct")
     public List<ProductModel> showAllProduct(){
         return service.showAllProductModel();
@@ -44,12 +51,18 @@ public class ControllerLayer {
     @GetMapping("/showclient/{id}/product")
     public List<ProductModel> showProductModelByCustomerId(@PathVariable("id") int id) {
         return service.showProductModelByCustomerId(id);
-    }@PostMapping("/showclient/{id}/product")
-    public ResponseEntity<String> addProductModel(@PathVariable("id") int id, @RequestBody ProductModel model) {
-
-        return  ResponseEntity.ok("THE  PRODUCT HAS BEEN SUCCESSFULLY CREATED");
     }
-
-
-
+    @GetMapping("/showproduct/date")
+    public List<ProductModel> showProductByDate(
+            @RequestParam int startday,
+            @RequestParam int startmonth,
+            @RequestParam int startyear,
+            @RequestParam int endday,
+            @RequestParam int endmonth,
+            @RequestParam int endyear
+    ){
+        LocalDate startdate = LocalDate.of(startyear, startmonth, startday);
+        LocalDate enddate = LocalDate.of(endyear, endmonth, endday);
+        return  service.showProductModelByDate(startdate,enddate);
+    }
 }
