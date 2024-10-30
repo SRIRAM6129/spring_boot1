@@ -15,7 +15,10 @@ public class ClientModel {
     private int id;
 
     private String name;
-    private String gender;
+
+    @Enumerated(EnumType.STRING)
+
+    private Gender gender;
     private String PhoneNumber;
     private String adhaarNumber;
     private String accountNumber;
@@ -27,7 +30,7 @@ public class ClientModel {
     public ClientModel() {
     }
 
-    public ClientModel(int id, String name, String gender, String phoneNumber, String adhaarNumber, String accountNumber, List<ProductModel> products) {
+    public ClientModel(int id, String name, Gender gender, String phoneNumber, String adhaarNumber, String accountNumber, List<ProductModel> products) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -35,7 +38,6 @@ public class ClientModel {
         this.adhaarNumber = adhaarNumber;
         this.accountNumber = accountNumber;
         this.products = products;
-
     }
 
     public int getId() {
@@ -54,11 +56,11 @@ public class ClientModel {
         this.name = name;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -92,6 +94,19 @@ public class ClientModel {
 
     public void setProducts(List<ProductModel> products) {
         this.products = products;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", PhoneNumber='" + PhoneNumber + '\'' +
+                ", adhaarNumber='" + adhaarNumber + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", products=" + products +
+                '}';
     }
 }
 

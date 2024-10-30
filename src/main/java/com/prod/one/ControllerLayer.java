@@ -59,9 +59,15 @@ public class ControllerLayer {
     }
 
     //SHOW PRODUCTS OF AN CLIENT
-    @GetMapping("/showclient/{id}/product")
+    @GetMapping("/client/{id}/product")
     public List<ProductModel> showProductModelByCustomerId(@PathVariable("id") int id) {
         return service.showProductModelByCustomerId(id);
+    }
+
+    //SHOW PRODUCT OF AN CLIENT BETWEEN THE DATE
+    @GetMapping("/client/{id}/product/date")
+    public List<ProductModel> showProductModelByDate(@PathVariable("id") int id) {
+        return null;
     }
 
     //SHOW PRODUCTS BETWEEN THE DATE
@@ -80,4 +86,30 @@ public class ControllerLayer {
         return service.showProductModelByDate(startdate, enddate);
     }
 
+    //EXCEL FOR SHOW PRODUCT BASED ON CUSTOMER ID
+    @GetMapping("/client/{id}/product/excel")
+
+    public ResponseEntity<String> createExcelOnProductByCustomerId(){
+        return ResponseEntity.ok("EXCEL BASED ON CUSTOMER ID HAS BEEN SUCCESSFULLY GENERATED");
+    }
+    //EXCEL FOR SHOW PRODUCT BASED ON CUSTOMER ID BETWEEN DATE
+    @GetMapping("/client/{id}/product/date")
+    public ResponseEntity<String> createExcelOnProductByCustomerIdBetweenDate(){
+        return ResponseEntity.ok("EXCEL BASED ON CUSTOMER ID BETWEEN DATE HAS BEEN SUCCESSFULLY GENERATED");
+    }
+    //EXCEL FOR SHOW PRODUCT BETWEEN THE DATE
+    @GetMapping("/showproduct/date/excel")
+    public ResponseEntity<String> createExcelOnProductByBetweenDate(
+            @RequestParam int startday,
+            @RequestParam int startmonth,
+            @RequestParam int startyear,
+            @RequestParam int endday,
+            @RequestParam int endmonth,
+            @RequestParam int endyear
+    ){
+        LocalDate startdate = LocalDate.of(startyear, startmonth, startday);
+        LocalDate enddate = LocalDate.of(endyear, endmonth, endday);
+        return ResponseEntity.ok("EXCEL BETWEEN DATE HAS BEEN SUCCESSFULLY GENERATED");
+    }
 }
+
