@@ -16,9 +16,8 @@ public class ClientModel {
 
     private String name;
 
-    @Enumerated(EnumType.STRING)
 
-    private Gender gender;
+    private String gender;
     private String PhoneNumber;
     private String adhaarNumber;
     private String accountNumber;
@@ -28,16 +27,6 @@ public class ClientModel {
     private List<ProductModel> products;
 
     public ClientModel() {
-    }
-
-    public ClientModel(int id, String name, Gender gender, String phoneNumber, String adhaarNumber, String accountNumber, List<ProductModel> products) {
-        this.id = id;
-        this.name = name;
-        this.gender = gender;
-        PhoneNumber = phoneNumber;
-        this.adhaarNumber = adhaarNumber;
-        this.accountNumber = accountNumber;
-        this.products = products;
     }
 
     public int getId() {
@@ -56,11 +45,11 @@ public class ClientModel {
         this.name = name;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -96,17 +85,14 @@ public class ClientModel {
         this.products = products;
     }
 
-    @Override
-    public String toString() {
-        return "ClientModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", PhoneNumber='" + PhoneNumber + '\'' +
-                ", adhaarNumber='" + adhaarNumber + '\'' +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", products=" + products +
-                '}';
+    public ClientModel(int id, String name, String gender, String phoneNumber, String adhaarNumber, String accountNumber, List<ProductModel> products) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        PhoneNumber = phoneNumber;
+        this.adhaarNumber = adhaarNumber;
+        this.accountNumber = accountNumber;
+        this.products = products;
     }
 }
 

@@ -25,12 +25,12 @@
                     cell.setCellValue(columns[i]);
                 }
 
-                int rowindex = 0;
+                int rowindex = 1;
                 for (ProductModel product : products) {
                     row = sheet.createRow(rowindex);
                     row.createCell(0).setCellValue(product.getCustomerId());
                     row.createCell(1).setCellValue(product.getClient().getName());
-                    row.createCell(2).setCellValue(product.getCreatedDate());
+                    row.createCell(2).setCellValue(product.getCreatedDate().toString());
                     row.createCell(3).setCellValue(product.getCreatedTime().toString());
                     row.createCell(4).setCellValue(product.getQuantity());
                 }

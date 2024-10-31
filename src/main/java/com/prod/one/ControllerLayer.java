@@ -90,21 +90,6 @@ public class ControllerLayer {
         return service.showProductModelByDate(startdate, enddate);
     }
 
-    //EXCEL FOR SHOW PRODUCT BASED ON CUSTOMER ID
-    @GetMapping("/client/{id}/product/excel")
-    public ResponseEntity<byte[]> createExcelOnProductByCustomerId(@PathVariable("id") int id) throws IOException {
-
-        List <ProductModel> products = service.showProductModelByCustomerId(id);
-
-        byte[] excelFile = excelGenerator.createExcelOnProductByCustomerId(products);
-
-        return ResponseEntity
-                .ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename= PRODUCTS.xls")
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(excelFile);
-    }
-
     //EXCEL FOR SHOW PRODUCT BASED ON CUSTOMER ID BETWEEN DATE
     @GetMapping("/client/{id}/product/date")
     public ResponseEntity<String> createExcelOnProductByCustomerIdBetweenDate(@PathVariable("id") int id){
@@ -126,5 +111,21 @@ public class ControllerLayer {
         LocalDate enddate = LocalDate.of(endyear, endmonth, endday);
         return ResponseEntity.ok("EXCEL BETWEEN DATE HAS BEEN SUCCESSFULLY GENERATED");
     }
+
+    //EXCEL FOR SHOW PRODUCT BASED ON CUSTOMER ID
+    @GetMapping("/client/{id}/product/excel")
+    public ResponseEntity<byte[]> createExcelOnProductByCustomerId(@PathVariable("id") int id) throws IOException {
+
+        List <ProductModel> products = service.showProductModelByCustomerId(id);
+
+        byte[] excelFile = excelGenerator.createExcelOnProductByCustomerId(products);
+
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename= PRODUCTS.xls")
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(excelFile);
+    }
+
 }
 
