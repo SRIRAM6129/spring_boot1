@@ -1,8 +1,12 @@
 package com.prod.one;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 @RestController
@@ -11,6 +15,8 @@ public class ControllerLayer {
 
     @Autowired
     ServiceLayer service;
+    @Autowired
+    private ExcelGenerator excelGenerator;
 
 
     //TEST IF SERVER IS RUNNING
@@ -86,8 +92,17 @@ public class ControllerLayer {
 
     //EXCEL FOR SHOW PRODUCT BASED ON CUSTOMER ID
     @GetMapping("/client/{id}/product/excel")
-    public ResponseEntity<String> createExcelOnProductByCustomerId(@PathVariable("id") int id){
-        return ResponseEntity.ok("EXCEL BASED ON CUSTOMER ID HAS BEEN SUCCESSFULLY GENERATED");
+    public ResponseEntity<byte[]> createExcelOnProductByCustomerId(@PathVariable("id") int id) throws IOException {
+
+        List <ProductModel> products = service.showProductModelByCustomerId(id);
+
+        byte[] excelFile = excelGenerator.createExcelOnProductByCustomerId(products);
+
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename= PRODUCTS.xls")
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(excelFile);
     }
 
     //EXCEL FOR SHOW PRODUCT BASED ON CUSTOMER ID BETWEEN DATE
